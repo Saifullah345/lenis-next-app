@@ -23,7 +23,7 @@ export default function ScrollProgressBar() {
     <div className="fixed left-0 top-0 z-50 h-1 w-full bg-white/10">
       <div
         ref={barRef}
-        className="h-full w-full origin-left scale-x-0 bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-500"
+        className="h-full w-full origin-left scale-x-0 bg-linear-to-r from-emerald-400 via-cyan-400 to-violet-500"
       />
     </div>
   );

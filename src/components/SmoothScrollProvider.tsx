@@ -3,6 +3,7 @@
 import { ReactLenis } from "lenis/react";
 import type { LenisOptions } from "lenis";
 import type { ReactNode } from "react";
+import GsapLenisBridge from "./GsapLenisBridge";
 
 /**
  * Global smooth-scroll provider.
@@ -27,8 +28,9 @@ const options: LenisOptions = {
   orientation: "vertical",
   gestureOrientation: "vertical",
   infinite: false,
-  // Keep Lenis driving its own RAF loop.
-  autoRaf: true,
+  // GSAP's ticker drives the RAF loop instead (see GsapLenisBridge), so that a
+  // single clock advances both Lenis and every GSAP ScrollTrigger animation.
+  autoRaf: false,
 };
 
 export default function SmoothScrollProvider({
@@ -38,6 +40,7 @@ export default function SmoothScrollProvider({
 }) {
   return (
     <ReactLenis root options={options}>
+      <GsapLenisBridge />
       {children}
     </ReactLenis>
   );

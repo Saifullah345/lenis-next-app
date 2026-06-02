@@ -2,6 +2,10 @@ import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import VelocitySkewText from "@/components/VelocitySkewText";
 import HorizontalScrollSection from "@/components/HorizontalScrollSection";
+import StairCards from "@/components/StairCards";
+import GsapShowcase from "@/components/GsapShowcase";
+import GsapReveal from "@/components/GsapReveal";
+import StackingCards from "@/components/StackingCards";
 
 export default function Home() {
   return (
@@ -77,7 +81,7 @@ export default function Home() {
             "No separate scroll listener needed",
           ].map((text, i) => (
             <Reveal key={text} delay={i * 120}>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-lg">
+              <div className="rounded-2xl border border-white/10 bg-white/3 p-6 text-lg">
                 {text}
               </div>
             </Reveal>
@@ -96,6 +100,40 @@ export default function Home() {
         <VelocitySkewText text="Velocity reactive" />
         <VelocitySkewText text="Driven by Lenis" />
       </section>
+
+      {/* ──────────────────── GSAP REVEAL ──────────────────────── */}
+      <section
+        id="gsap-reveal"
+        className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 py-32"
+      >
+        <p className="text-sm uppercase tracking-[0.3em] text-white/40">
+          Powered by GSAP ScrollTrigger
+        </p>
+        <GsapReveal className="mt-8 grid w-full max-w-3xl gap-4">
+          {[
+            "ScrollTrigger synced to the Lenis loop",
+            "One GSAP ticker drives the smooth scroll",
+            "Staggered with a power3 ease",
+            "Plays in, reverses out",
+          ].map((text) => (
+            <div
+              key={text}
+              className="rounded-2xl border border-white/10 bg-white/3 p-6 text-lg"
+            >
+              {text}
+            </div>
+          ))}
+        </GsapReveal>
+      </section>
+
+      {/* ─────────────────── GSAP PINNED SHOWCASE ───────────────── */}
+      <GsapShowcase />
+
+      {/* ──────────────────── STACKING CARDS ────────────────────── */}
+      <StackingCards />
+
+      {/* ─────────────────────── STAIRCASE ─────────────────────── */}
+      <StairCards />
 
       {/* ─────────────────────── HORIZONTAL ────────────────────── */}
       <HorizontalScrollSection />

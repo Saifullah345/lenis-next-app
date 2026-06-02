@@ -54,7 +54,7 @@ export default function HorizontalScrollSection() {
           {CARDS.map((card) => (
             <div
               key={card.n}
-              className={`flex h-[60vh] w-[80vw] flex-col justify-between rounded-3xl border border-white/10 bg-gradient-to-br ${card.tint} to-transparent p-10 sm:w-[55vw] md:w-[40vw]`}
+              className={`flex h-[60vh] w-[80vw] flex-col justify-between rounded-3xl border border-white/10 bg-linear-to-br ${card.tint} to-transparent p-10 sm:w-[55vw] md:w-[40vw]`}
             >
               <span className="font-mono text-sm text-white/50">{card.n}</span>
               <h3 className="text-4xl font-bold text-white md:text-6xl">
