@@ -1,65 +1,140 @@
-import Image from "next/image";
+import Parallax from "@/components/Parallax";
+import Reveal from "@/components/Reveal";
+import VelocitySkewText from "@/components/VelocitySkewText";
+import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="relative">
+      {/* ───────────────────────── HERO ───────────────────────── */}
+      <section
+        id="hero"
+        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center"
+      >
+        <Parallax speed={0.15} className="absolute inset-0 -z-10">
+          <div className="absolute left-1/2 top-1/2 h-[120vmax] w-[120vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.18),transparent_60%)]" />
+        </Parallax>
+
+        <p className="mb-4 text-sm uppercase tracking-[0.4em] text-emerald-300/80">
+          Next.js × Lenis
+        </p>
+        <h1 className="max-w-4xl text-5xl font-black leading-[1.05] tracking-tight sm:text-7xl md:text-8xl">
+          Every scroll,
+          <br />
+          buttery smooth.
+        </h1>
+        <p className="mt-6 max-w-xl text-base text-white/60 md:text-lg">
+          One Lenis instance wraps the whole app, so the page scroll, the
+          progress bar, parallax, reveals, velocity skew and the horizontal
+          gallery are all driven by the same smooth animation loop.
+        </p>
+        <div className="mt-10 animate-bounce text-white/40">↓ scroll</div>
+      </section>
+
+      {/* ──────────────────────── PARALLAX ─────────────────────── */}
+      <section
+        id="parallax"
+        className="relative flex min-h-screen flex-col items-center justify-center gap-8 overflow-hidden px-6 py-32"
+      >
+        <Reveal>
+          <h2 className="text-center text-4xl font-bold md:text-6xl">
+            Parallax depth
+          </h2>
+        </Reveal>
+
+        <div className="relative grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
+          <Parallax speed={0.35}>
+            <Card title="Layer A" subtitle="speed 0.35" tint="bg-emerald-500/10" />
+          </Parallax>
+          <Parallax speed={0.15}>
+            <Card title="Layer B" subtitle="speed 0.15" tint="bg-cyan-500/10" />
+          </Parallax>
+          <Parallax speed={0.55}>
+            <Card title="Layer C" subtitle="speed 0.55" tint="bg-violet-500/10" />
+          </Parallax>
+        </div>
+        <p className="max-w-md text-center text-sm text-white/50">
+          Each card translates at its own rate against the Lenis scroll value —
+          watch the telemetry HUD in the corner.
+        </p>
+      </section>
+
+      {/* ───────────────────────── REVEAL ──────────────────────── */}
+      <section
+        id="reveal"
+        className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 py-32"
+      >
+        <Reveal>
+          <h2 className="text-center text-4xl font-bold md:text-6xl">
+            Reveal on scroll
+          </h2>
+        </Reveal>
+        <div className="mt-8 grid w-full max-w-3xl gap-4">
+          {[
+            "Gated by the smooth Lenis position",
+            "Fades + slides into place",
+            "Staggered with per-item delays",
+            "No separate scroll listener needed",
+          ].map((text, i) => (
+            <Reveal key={text} delay={i * 120}>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-lg">
+                {text}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ──────────────────────── VELOCITY ─────────────────────── */}
+      <section
+        id="velocity"
+        className="flex min-h-screen flex-col items-center justify-center gap-10 overflow-hidden px-6 py-32"
+      >
+        <p className="text-sm uppercase tracking-[0.3em] text-white/40">
+          Scroll fast — it bends
+        </p>
+        <VelocitySkewText text="Velocity reactive" />
+        <VelocitySkewText text="Driven by Lenis" />
+      </section>
+
+      {/* ─────────────────────── HORIZONTAL ────────────────────── */}
+      <HorizontalScrollSection />
+
+      {/* ───────────────────────── OUTRO ───────────────────────── */}
+      <section
+        id="outro"
+        className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 py-32 text-center"
+      >
+        <Reveal>
+          <h2 className="text-4xl font-bold md:text-6xl">That&apos;s the loop.</h2>
+        </Reveal>
+        <Reveal delay={150}>
+          <p className="max-w-lg text-white/60">
+            Smooth scroll · progress bar · live telemetry · scrollTo navigation ·
+            pause / resume · parallax · reveal · velocity skew · horizontal
+            scroll — every one powered by a single Lenis instance.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        </Reveal>
+      </section>
+    </main>
+  );
+}
+
+function Card({
+  title,
+  subtitle,
+  tint,
+}: {
+  title: string;
+  subtitle: string;
+  tint: string;
+}) {
+  return (
+    <div
+      className={`flex h-64 flex-col justify-between rounded-3xl border border-white/10 ${tint} p-6`}
+    >
+      <span className="font-mono text-xs text-white/40">{subtitle}</span>
+      <span className="text-2xl font-bold">{title}</span>
     </div>
   );
 }
